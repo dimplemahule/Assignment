@@ -1,14 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors')
 const route = require('./route/route')
+const mongoose = require('mongoose');
 
 const app = express()
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(cors());
 
+mongoose.connect("mongodb+srv://LalitaMahule:lali123456789@cluster0.ypjvt.mongodb.net/Node?retryWrites=true&w=majority",{
+    useNewUrlParser: true
+})
+.then( () => console.log("MongoDB is connected"))
+.catch ( ( err => console.log(err)))
 
 app.use('/', route)
 
